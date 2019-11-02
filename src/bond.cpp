@@ -3,7 +3,7 @@
 Bond::Bond(Atom *atom1, Atom *atom2, DrawingInfo *info, QGraphicsItem *parent)
     : QGraphicsLineItem(parent), myStartAtom(atom1), myEndAtom(atom2), _info(info),
       myThickness(DEFAULT_BOND_THICKNESS), hoverOver(false), dashedLine(false), myLabel(0),
-      myPen(Qt::black)
+      myPen(Qt::black),translucentLine(false)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -119,6 +119,20 @@ void Bond::toggleDashing()
     dashedLine = !dashedLine;
 }
 
+void Bond::toggleTranslucent()
+{
+    if (translucentLine) {
+        myThickness = DEFAULT_BOND_THICKNESS; // TODO - Should probably be removed to prevent loss
+                                              // of thickness setting on toggle
+        myPen.setStyle(Qt::SolidLine);
+    } else {
+        myThickness = DEFAULT_BOND_THICKNESS; // TODO - Should probably be removed to prevent loss
+                                              // of thickness setting on toggle
+        this->generateTranslucentPen();
+    }
+    translucentLine = !translucentLine;
+}
+
 void Bond::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);
@@ -155,6 +169,7 @@ void Bond::serialize(QXmlStreamWriter *writer)
     writer->writeAttribute("width", QString("%1").arg(effectiveWidth));
     writer->writeAttribute("length", QString("%1").arg(myLength));
     writer->writeAttribute("dashed", QString("%1").arg(dashedLine));
+    writer->writeAttribute("translucent", QString("%1").arg(translucentLine));
     writer->writeAttribute("label", QString("%1").arg(hasLabel()));
     if (hasLabel()) {
         myLabel->serialize(writer);
@@ -183,8 +198,14 @@ Bond *Bond::deserialize(QXmlStreamReader *reader, DrawingInfo *drawingInfo, QLis
     b->effectiveWidth = attr.value("width").toString().toDouble();
     b->myLength = attr.value("length").toString().toDouble();
     b->dashedLine = (attr.value("dashed").toString().toInt() == 1);
+    b->translucentLine = (attr.value("translucent").toString().toInt() == 1);
     if (b->dashedLine) {
         b->generateDashedPen();
+    } else {
+        b->myPen.setStyle(Qt::SolidLine);
+    }
+    if (b->translucentLine) {
+        b->generateTranslucentPen();
     } else {
         b->myPen.setStyle(Qt::SolidLine);
     }

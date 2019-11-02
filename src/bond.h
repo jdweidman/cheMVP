@@ -25,6 +25,12 @@ class Bond : public QGraphicsLineItem
         myPen.setDashPattern(dashes);
     }
 
+    void generateTranslucentPen()
+    {
+        //Set color just to green for now, add alpha channel later
+        myPen.setColor(Qt::blue);
+    }
+
   public:
     enum { Type = UserType + BONDTYPE };
     int type() const
@@ -45,6 +51,7 @@ class Bond : public QGraphicsLineItem
         myThickness = val;
     }
     void toggleDashing();
+    void toggleTranslucent();
     void toggleLabel();
     void updatePosition();
     Label *label()
@@ -85,6 +92,10 @@ class Bond : public QGraphicsLineItem
     {
         return dashedLine;
     }
+    bool isTranslucent() const
+    {
+        return translucentLine;
+    }
 
     void serialize(QXmlStreamWriter *writer);
     static Bond *
@@ -103,6 +114,7 @@ class Bond : public QGraphicsLineItem
     double myLength;
     bool hoverOver;
     bool dashedLine;
+    bool translucentLine;
     Label *myLabel;
     QPen myPen;
 
