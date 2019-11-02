@@ -215,6 +215,11 @@ QWidget *MainWindow::createBondsAndAnglesWidget(QMap<QString, QString> *options)
     toggleBondDashingButton->setToolTip(tr("Toggle dashed / solid bonds for the selected bonds"));
     bondSizeLayout->addWidget(toggleBondDashingButton, 0, 0, 1, 2);
 
+    // The bond translucency
+    toggleBondTranslucencyButton = new QPushButton(tr("Toggle Bond Translucency"));
+    toggleBondTranslucencyButton->setToolTip(tr("Toggle translucent / solid bonds for the selected bonds"));
+    bondSizeLayout->addWidget(toggleBondTranslucencyButton, 1, 0, 1, 2);
+
     // The bond thickness
     QLabel *bondSizeLabel = new QLabel("Bond thickness = ");
     bondSizeSpinBox = new QDoubleSpinBox();
@@ -225,8 +230,8 @@ QWidget *MainWindow::createBondsAndAnglesWidget(QMap<QString, QString> *options)
     bondSizeSpinBox->setFocusPolicy(Qt::NoFocus);
     bondSizeSpinBox->setValue(bondSizeSpinBox->minimum());
     bondSizeSpinBox->setAccelerated(true);
-    bondSizeLayout->addWidget(bondSizeLabel, 1, 0);
-    bondSizeLayout->addWidget(bondSizeSpinBox, 1, 1);
+    bondSizeLayout->addWidget(bondSizeLabel, 2, 0);
+    bondSizeLayout->addWidget(bondSizeSpinBox, 2, 1);
     connect(bondSizeSpinBox, SIGNAL(valueChanged(double)), this, SLOT(changeBondSize()));
     bondSizeWidget->setLayout(bondSizeLayout);
     layout->addWidget(bondSizeWidget);

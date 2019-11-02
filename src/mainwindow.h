@@ -146,6 +146,7 @@ class MainWindow : public QMainWindow
 
     QPushButton *toggleBondLabelsButton;
     QPushButton *toggleBondDashingButton;
+    QPushButton *toggleBondTranslucencyButton;
     QPushButton *toggleAngleLabelsButton;
     QPushButton *toggleAtomNumberSubscriptsButton;
     QPushButton *backgroundColorButton;

@@ -837,6 +837,17 @@ void DrawingCanvas::toggleBondDashing()
     refresh();
 }
 
+void DrawingCanvas::toggleBondTranslucency()
+{
+    Bond *bond;
+    foreach (bond, bondsList) {
+        if (bond->isSelected()) {
+            bond->toggleTranslucency();
+        }
+    }
+    refresh();
+}
+
 void DrawingCanvas::toggleBondLabels()
 {
     Bond *bond;

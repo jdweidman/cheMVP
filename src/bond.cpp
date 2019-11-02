@@ -119,7 +119,7 @@ void Bond::toggleDashing()
     dashedLine = !dashedLine;
 }
 
-void Bond::toggleTranslucent()
+void Bond::toggleTranslucency()
 {
     if (translucentLine) {
         myThickness = DEFAULT_BOND_THICKNESS; // TODO - Should probably be removed to prevent loss

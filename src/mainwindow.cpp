@@ -345,6 +345,7 @@ void MainWindow::resetSignalsOnFileLoad()
             canvas,
             SLOT(setAngleLabelPrecision(int)));
     connect(toggleBondDashingButton, SIGNAL(pressed()), canvas, SLOT(toggleBondDashing()));
+    connect(toggleBondTranslucencyButton, SIGNAL(pressed()), canvas, SLOT(toggleBondTranslucency()));
 
     connect(atomColorButton, SIGNAL(clicked()), canvas, SLOT(setAtomColors()));
     connect(atomDrawingStyleButtonGroup,

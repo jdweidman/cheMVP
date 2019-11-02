@@ -28,7 +28,8 @@ class Bond : public QGraphicsLineItem
     void generateTranslucentPen()
     {
         //Set color just to green for now, add alpha channel later
-        myPen.setColor(Qt::blue);
+        //myPen.setColor(Qt::blue);
+        myPen.setStyle(Qt::DotLine);
     }
 
   public:
@@ -51,7 +52,7 @@ class Bond : public QGraphicsLineItem
         myThickness = val;
     }
     void toggleDashing();
-    void toggleTranslucent();
+    void toggleTranslucency();
     void toggleLabel();
     void updatePosition();
     Label *label()

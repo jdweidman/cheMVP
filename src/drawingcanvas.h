@@ -91,6 +91,7 @@ class DrawingCanvas : public QGraphicsScene
     void setBackgroundColor();
     void setAtomColors();
     void toggleBondDashing();
+    void toggleBondTranslucency();
     void toggleAtomNumberSubscripts();
     void atomLabelFontChanged(const QFont &);
     void atomLabelFontSizeChanged(const QString &);
